@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặng Ngọc Phong - Portfolio</title>
+  <link rel="stylesheet" href="phong.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <script src="script.js" defer></script> 
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="phong-page">
+  <header class="fade-in">
+    <h1>ĐẶNG NGỌC PHONG</h1>
+    <p>Portfolio cá nhân</p>
+    <nav>
+      <button onclick="showSection('home')">Trang cá nhân</button>
+      <button onclick="showSection('hobby')">Sở thích</button>
+      <button onclick="showSection('skills')">Kỹ năng</button>
+      <button onclick="showSection('project')">Dự án</button>
+      <button onclick="showSection('contact')">Liên hệ</button>
+    </nav>
+  </header>
+
+  <div class="book">
+    <div class="book-inner">
+      <section id="home" class="content-section active fade-in" data-page="0">
+        <h2>Thông tin cá nhân</h2>
+        <img src="images/anh.phong/1.jpg" alt="Ảnh đại diện" class="avatar zoom-in">
+        <p><strong>Họ và tên:</strong> Đặng Ngọc Phong</p>
+        <p><strong>Ngày sinh:</strong> 20/12/2004</p>
+        <p><strong>Giới tính:</strong> Nam</p>
+        <p><strong>Email:</strong> <a href="mailto:ngocphong5279@gmail.com">ngocphong5279@gmail.com</a></p>
+        <p><strong>Số điện thoại:</strong> 0382787730</p>
+        <p><strong>Mục tiêu nghề nghiệp:</strong> Hoàn thiện bản thân và phát triển trong lĩnh vực thiết kế web.</p>
+      </section>
+
+      <section id="hobby" class="content-section" data-page="1">
+        <h2>Sở thích</h2>
+        <ul class="hobby-list">
+          <li><img src="images/anh.phong/sach.jpg" alt="Đọc sách"><p>Đọc sách</p></li>
+          <li><img src="images/anh.phong/lienminh.png" alt="Chơi game"><p>Chơi game</p></li>
+          <li><img src="images/anh.phong/nauan.jpg" alt="Nấu ăn"><p>Nấu ăn</p></li>
+        </ul>
+      </section>
+
+      <section id="skills" class="content-section" data-page="2">
+        <h2>Kỹ năng</h2>
+        <div class="skill"><span class="label">HTML / CSS</span><div class="bar"><div class="fill html" style="width:70%"></div><span class="percent">70%</span></div></div>
+        <div class="skill"><span class="label">JavaScript</span><div class="bar"><div class="fill js" style="width:60%"></div><span class="percent">60%</span></div></div>
+        <div class="skill"><span class="label">Python</span><div class="bar"><div class="fill python" style="width:65%"></div><span class="percent">65%</span></div></div>
+        <div class="skill"><span class="label">Teamwork</span><div class="bar"><div class="fill teamwork" style="width:80%"></div><span class="percent">80%</span></div></div>
+      </section>
+
+      <section id="project" class="content-section" data-page="3">
+        <h2>Dự án</h2>
+        <div class="fade-in">
+          <h3>Ứng dụng web Chatbot tự động</h3>
+          <p><strong>Mô tả:</strong> Ứng dụng web cho phép người dùng trò chuyện với chatbot.</p>
+          <p><strong>Công nghệ:</strong> HTML, CSS, JavaScript, Flask (Python).</p>
+          <p><strong>Vai trò:</strong> Lập trình viên hỗ trợ.</p>
+        </div>
+      </section>
+
+      <section id="contact" class="content-section" data-page="4">
+        <h2>Liên hệ</h2>
+        <p>Email: <a href="mailto:ngocphong5279@gmail.com">ngocphong5279@gmail.com</a></p>
+        <p>Điện thoại: 0382787730</p>
+        <p>GitHub: <a href="https://github.com/phong-123-tio" target="_blank">github.com/phong-123-tio</a></p>
+      </section>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <a href="index.html" class="nav-btn home-btn">🏠 Trang chính</a>
+  </div>
+
+  <footer>
+    © 2025 Đặng Ngọc Phong — Portfolio cá nhân
+  </footer>
+</body>
+</html>

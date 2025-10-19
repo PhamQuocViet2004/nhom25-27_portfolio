@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chung Võ Quốc Minh - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <script src="script.js" defer></script> 
+</head>
+<body class="minh-page">
+
+    <div id="bg-static"></div> 
+
+    <canvas id="falling-leaves"></canvas>
+
+    <div class="portfolio-container">
+        
+        <section id="gioi-thieu" class="card fade-in">
+            <div class="avatar-box">
+                <img src="images/anh2.minh/7114250330104.gif" alt="Góc GIF Động" class="corner-gif">
+                <img src="images/anh.minh/saba.jpg" alt="Ảnh Cá Nhân" class="avatar">
+            </div>
+            <h1>Chung Võ Quốc Minh</h1>
+            <p class="que-quan">Quê Quán: Long An - Kiến Tường</p>
+            
+        <p class="contact-info"><i class="fas fa-phone-alt icon-contact"></i> Email : [ miaonyaa@gmail.com]</p>
+            <p class="contact-info"><i class="fas fa-phone-alt icon-contact"></i> SĐT: [0394831053]</p>
+        <div class="social-links">
+                <a href="[https://github.com/IunaKieuTrang-art/Iuna]" target="_blank"><i class="fab fa-github icon-gh"></i></a> 
+                <a href="https://www.facebook.com/share/17FknzEYT1/" target="_blank"><i class="fab fa-facebook-f icon-fb"></i></a>
+                <a href="https://www.youtube.com/@SiiniYT" target="_blank"><i class="fab fa-youtube icon-yt"></i></a>
+                <a href="https://discord.gg/7hPDAcCz" target="_blank"><i class="fab fa-discord icon-dc"></i></a>
+                <a href="https://www.tiktok.com/@luna.kieutrang?_t=ZS-90WwxuVcjBZ&_r=1" target="_blank"><i class="fab fa-tiktok icon-tt"></i></a>
+            </div>
+        </section>
+
+        <section id="the-chinh" class="card grid-3">
+            <div class="mini-card so-thich" data-target="modal-sothich">
+                <h3>SỞ THÍCH</h3>
+                <img src="images/anh.minh/z7114151996572_ff0f332af4e0b34f6c5dfaf60588d643.jpg" alt="Sở Thích">
+            </div>
+            <div class="mini-card chuyen-mon" data-target="modal-chuyenmon">
+                <h3>CHUYÊN MÔN</h3>
+                <img src="images/anh.minh/sddefault.jpg" alt="Chuyên Môn">
+            </div>
+            <div class="mini-card du-an" data-target="modal-duan">
+                <h3>DỰ ÁN</h3>
+                <img src="images/anh2.minh/z7114228762110_1a50816a8359da48bf49c96e799da1a2.jpg" alt="Dự Án">
+            </div>
+        </section>
+        
+        <section id="ky-nang" class="card">
+            <h2>KỸ NĂNG CÁ NHÂN</h2>
+            <table class="skill-table">
+                <tr>
+                    <td>Phối hợp</td>
+                    <td>
+                        <span class="skill-percentage" data-target="88">0/100</span>
+                        <div class="skill-bar"><div class="skill-level p-88"></div></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tiếp thu</td>
+                    <td>
+                        <span class="skill-percentage" data-target="80">0/100</span>
+                        <div class="skill-bar"><div class="skill-level p-80"></div></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ứng biến</td>
+                    <td>
+                        <span class="skill-percentage" data-target="90">0/100</span>
+                        <div class="skill-bar"><div class="skill-level p-90"></div></div>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="lien-he" class="card">
+            <h2>LIÊN HỆ VỚI TÔI</h2>
+            <form action="#" method="POST" class="contact-form">
+                <input type="text" name="ho_ten" placeholder="Nhập Họ và Tên" required>
+                <input type="tel" name="sdt" placeholder="Số Điện Thoại" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="dia_chi" placeholder="Địa Chỉ" required>
+                <button type="submit" class="submit-btn">Gửi Liên Hệ</button>
+            </form>
+        </section>
+
+    </div> 
+    
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title"></h2>
+            
+            <div id="modal-sothich" class="modal-detail hidden">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="images/anh.minh/z7114151639674_25c03e429818c7cb9670444b5462e0b9.jpg" alt="Sở thích 1">
+                        <p class="caption"></p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/anh.minh/z7114151698694_db0b6e6ff96a00b17cf63fbf791c792a.jpg" alt="Sở thích 2">
+                        <p class="caption"></p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/anh.minh/z7114151697975_635efcc25dacf180ee1b6fdf98e24ca6.jpg" alt="Sở thích 3">
+                        <p class="caption">sở thích cosplay chỉ vậy thui ~~~</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="modal-chuyenmon" class="modal-detail hidden">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="images/anh.minh/b3b094266123d17d8832.webp" alt="Chuyên môn 1">
+                        <p class="caption"></p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/anh.minh/5-mon-an-hoi-mau-tot-nhat-trong-minecraft-1.19_IJBW.jpg" alt="Chuyên môn 2">
+                        <p class="caption"></p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/anh.minh/game-nau-an (7).jpg" alt="Chuyên môn 3">
+                        <p class="caption">thích nấu ăn nấu những thứ độc lạ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-duan" class="modal-detail hidden">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="images/anh2.minh/z7114228821823_182ccad1a8ffd3c475679850f608e5a2.jpg" alt="Dự án 1">
+                        <p class="caption"></p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/anh2.minh/z7114228763282_2eb81c681f8c2fb90bf448bf6d2b973c.jpg" alt="Dự án 2">
+                        <p class="caption"></p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/anh2.minh/z7114228801999_f8e6a94af8dc25cd6e4313a45a6631a6.jpg" alt="Dự án 3">
+                        <p class="caption">dự án đã làm cùng nhau</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút điều hướng -->
+     <div class="nav-buttons">
+       <a href="index.html" class="nav-btn home-btn">🏠 Trang chính</a>
+    </div>
+
+    <footer>
+    <p>
+      © 2025 Chung Võ Quốc Minh
+    </p>
+  </footer>
+</body>
+</html>

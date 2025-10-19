@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Quản Lý Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <script src="script.js" defer></script> 
+  <style>
+    /* CSS tạm thời để làm nổi bật các khu vực chỉnh sửa */
+    .editable-section p, .editable-section li, .editable-section h4, .editable-section span {
+        outline: 1px dashed #f97316;
+        padding: 4px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+    }
+    .editable-section *:focus {
+        outline: 2px solid #f97316;
+    }
+  </style>
+</head>
+<body>
+  <header class="header small" style="background: #ef4444;">
+    <h1 id="edit-header-title">CHẾ ĐỘ CHỈNH SỬA</h1> 
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2>Thông tin cá nhân</h2>
+      <div id="personal-info">
+        <p><strong>Họ tên:</strong> <span contenteditable="true" id="name">Mặc định</span></p>
+        <p><strong>Ngày sinh:</strong> <span contenteditable="true" id="class">Mặc định</span></p>
+        <p><strong>Quê quán:</strong> <span contenteditable="true" id="hometown">Mặc định</span></p>
+        <p><strong>Ngành học:</strong> <span contenteditable="true" id="email">Mặc định</span></p>
+        <p><strong>Email:</strong> <span contenteditable="true" id="email">Mặc định</span></p>
+        <p><strong>SĐT:</strong> <span contenteditable="true" id="phone">Mặc định</span></p>
+      </div>
+    </section>
+
+    <section id="career" class="section editable-section">
+      <h2>💼 Thông tin nghề nghiệp</h2>
+      <p><strong>Mục tiêu nghề nghiệp:</strong></p>
+      <p contenteditable="true">Mục tiêu nghề nghiệp mặc định</p>
+    </section>
+
+    <section id="skills" class="editable-section">
+      <h2>Kỹ năng</h2>
+      <ul contenteditable="true">
+        <li>Kỹ năng mặc định 1</li>
+        <li>Kỹ năng mặc định 2</li>
+      </ul>
+    </section>
+
+    <section id="hobby" class="editable-section">
+      <h2>Sở thích</h2>
+      <p contenteditable="true">Sở thích mặc định</p>
+    </section>
+
+    <section id="awards" class="section editable-section">
+      <h2>🎓 Chứng chỉ & Giải thưởng</h2>
+      <ul contenteditable="true">
+        <li>Không có</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="editable-section">
+      <h2>Dự án</h2>
+      <div class="project-grid">
+        <div class="project-card editable-section">
+          <h4 contenteditable="true">Dự án 1</h4>
+          <p contenteditable="true">Mô tả dự án 1.</p>
+        </div>
+        <div class="project-card editable-section">
+          <h4 contenteditable="true">Dự án 2</h4>
+          <p contenteditable="true">Mô tả dự án 2.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="editable-section">
+      <h2>Liên hệ</h2>
+      <p contenteditable="true"><i class="fa-solid fa-envelope"></i> email@domain.com</p>
+      <p contenteditable="true"><i class="fa-solid fa-phone"></i> 090xxxxxxx</p>
+    </section>
+  </main>
+  
+  <div id="actions-controls">
+    <button id="save-all-btn" class="action-btn save">LƯU TOÀN BỘ PORTFOLIO</button>
+    <a href="#" id="view-page-link" class="action-btn view">XEM TRANG</a>
+    <button id="reset-btn" class="action-btn reset">KHÔI PHỤC BẢN GỐC</button>
+  </div>
+
+  <footer>
+    <p>© 2025 Nhóm 25-27 Portfolio. All rights reserved.</p>
+  </footer>
+</body>
+</html>

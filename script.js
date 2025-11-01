@@ -1,3 +1,9 @@
+function safeAddListenerById(id, event, handler) {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener(event, handler);
+  else console.warn(`Không tìm thấy phần tử #${id}`);
+}
+
 // Hàm tiện ích để lấy tham số từ URL (dùng cho trang edit.html)
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -336,10 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // Nếu bị chặn autoplay, phát khi click đầu tiên
     const music = document.getElementById("bgMusic");
-    music.volume = 0.5;
-    document.addEventListener("click", () => {
-      if (music.paused) music.play().catch(err => console.log("Autoplay bị chặn:", err));
-    });
+    if (music) {
+        music.volume = 0.5;
+        document.addEventListener("click", () => {
+            if (music.paused) music.play().catch(err => console.log("Autoplay bị chặn:", err));
+        });
+    }
 
     // Hiệu ứng thanh kỹ năng khi cuộn
 window.addEventListener("scroll", () => {
@@ -352,12 +360,16 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Gửi form liên hệ
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("💙 Cảm ơn bạn đã liên hệ! Mình sẽ phản hồi sớm nhất có thể.");
-  this.reset();
-});
+console.log("Test element:", document.getElementById("contactForm"));
+// Gửi form liên hệ (chạy an toàn, không lỗi nếu trang không có form)
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("💙 Cảm ơn bạn đã liên hệ! Mình sẽ phản hồi sớm nhất có thể.");
+    this.reset();
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const bars = document.querySelectorAll(".progress");
@@ -378,7 +390,224 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    // === LOGIC THANH TIẾN TRÌNH KỸ NĂNG & NGÔN NGỮ ===
+    const skillBars = document.querySelectorAll('.cert-fill');
 
+    function animateSkillBars() {
+        skillBars.forEach(bar => {
+            const rect = bar.getBoundingClientRect();
+            // Kích hoạt khi thanh cuộn vào tầm nhìn (100px từ đáy màn hình)
+            if (rect.top < window.innerHeight - 100 && rect.bottom > 0) {
+                const target = bar.getAttribute('data-percent');
+                bar.style.width = target; // Kích hoạt animation CSS
+            } else {
+                // Đặt lại về 0% khi ra khỏi tầm nhìn để có thể chạy lại
+                bar.style.width = '0%';
+            }
+        });
+    }
+
+    // Kích hoạt khi trang tải và khi cuộn
+    window.addEventListener('scroll', animateSkillBars);
+    animateSkillBars(); // Chạy lần đầu khi load trang
+
+
+    // === LOGIC BIỂU ĐỒ TRÒN KỸ NĂNG SỐNG (PIE CHART) ===
+    const ctx = document.getElementById('lifeSkillsPieChart');
+    const skillLabels = document.querySelectorAll('.skill-label');
+
+    // Dữ liệu ban đầu cho biểu đồ (có thể điều chỉnh giá trị)
+    const pieChartData = {
+        labels: ['Làm việc nhóm', 'Giải quyết vấn đề', 'Giao tiếp', 'Tư duy phản biện'],
+        datasets: [{
+            data: [25, 25, 25, 25], // Chia đều ban đầu
+            backgroundColor: [
+                'rgba(14, 165, 233, 0.8)', // Màu xanh
+                'rgba(52, 211, 153, 0.8)', // Màu xanh lá
+                'rgba(251, 191, 36, 0.8)', // Màu vàng
+                'rgba(239, 68, 68, 0.8)'   // Màu đỏ
+            ],
+            borderColor: '#fff',
+            borderWidth: 2,
+            hoverOffset: 10 // Độ nổi bật khi hover
+        }]
+    };
+
+    // Khởi tạo biểu đồ
+    const lifeSkillsPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: pieChartData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false // Ẩn legend mặc định của Chart.js
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            // Hiển thị phần trăm (có thể tùy chỉnh)
+                            if (context.parsed !== null) {
+                                label += (context.parsed / getTotal(context.dataset.data) * 100).toFixed(0) + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            onClick: (e, elements) => {
+                if (elements.length > 0) {
+                    const clickedIndex = elements[0].index;
+                    togglePieChartSelection(clickedIndex);
+                }
+            }
+        }
+    });
+
+    // Hàm tính tổng để hiển thị phần trăm
+    function getTotal(data) {
+        return data.reduce((a, b) => a + b, 0);
+    }
+
+    // Hàm xử lý khi click vào biểu đồ hoặc nhãn
+    function togglePieChartSelection(index) {
+        // Reset tất cả về trạng thái ban đầu
+        lifeSkillsPieChart.data.datasets[0].backgroundColor = pieChartData.datasets[0].backgroundColor;
+        lifeSkillsPieChart.data.datasets[0].hoverOffset = 10;
+        
+        skillLabels.forEach(label => label.classList.remove('active'));
+
+        if (index !== undefined) {
+            // Nổi bật phần được chọn
+            const newColors = [...pieChartData.datasets[0].backgroundColor];
+            const newOffsets = new Array(newColors.length).fill(0); // Đặt lại tất cả offset về 0
+
+            // Tăng độ sáng và đẩy ra ngoài cho phần được chọn
+            const originalColor = Chart.helpers.get = Chart.helpers.color(newColors[index]);
+            newColors[index] = originalColor.lighten(0.1).rgbString(); // Làm sáng hơn
+            newOffsets[index] = 20; // Đẩy ra xa hơn
+
+            lifeSkillsPieChart.data.datasets[0].backgroundColor = newColors;
+            lifeSkillsPieChart.data.datasets[0].hoverOffset = newOffsets;
+
+            // Kích hoạt class 'active' cho nhãn tương ứng
+            skillLabels[index].classList.add('active');
+        }
+
+        lifeSkillsPieChart.update();
+    }
+
+    // Xử lý click vào các nhãn dưới biểu đồ
+    skillLabels.forEach((label, index) => {
+        label.addEventListener('click', () => {
+            // Kiểm tra xem nhãn này đã active chưa
+            if (label.classList.contains('active')) {
+                togglePieChartSelection(undefined); // Bỏ chọn nếu đã active
+            } else {
+                togglePieChartSelection(index); // Chọn nhãn này
+            }
+        });
+    });
+});
+
+// === DỰ ÁN (Project Slider) ===
+document.addEventListener("DOMContentLoaded", () => {
+  const pSlides = document.querySelectorAll(".viet-page .project-slide");
+  const nextP = document.getElementById("nextProject");
+  const prevP = document.getElementById("prevProject");
+
+  // Chỉ chạy nếu tồn tại phần tử
+  if (pSlides.length && nextP && prevP) {
+    let i = 0;
+
+    function showProject(n) {
+      pSlides.forEach(slide => slide.classList.remove("active"));
+      pSlides[n].classList.add("active");
+    }
+
+    nextP.addEventListener("click", () => {
+      i = (i + 1) % pSlides.length;
+      showProject(i);
+    });
+
+    prevP.addEventListener("click", () => {
+      i = (i - 1 + pSlides.length) % pSlides.length;
+      showProject(i);
+    });
+  }
+});
+
+
+// === SỞ THÍCH - TỰ ĐỘNG CHUYỂN ẢNH ===
+// === CHỈ CHẠY CHO TRANG VIET.HTML ===
+function isVietPage() {
+  const file = window.location.pathname.split("/").pop().toLowerCase();
+  return file === "viet.html";
+}
+
+if (isVietPage()) {
+  window.addEventListener("load", () => {
+    const carousel = document.querySelector(".hobbies-carousel");
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll(".slide");
+    if (!slides.length) return;
+
+    let current = 0;
+    const interval = 2000; // 2 giây
+
+    // Hiển thị slide hiện tại
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+    }
+
+    // Tự động chuyển slide
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }, interval);
+
+    // Bắt đầu với slide đầu tiên
+    showSlide(current);
+    console.log("🎬 Hobbies slideshow started with", slides.length, "slides.");
+  });
+}
+
+// --- LOGIC TỰ ĐỘNG CHUYỂN SLIDE CHO HOBBIES-CAROUSEL ---
+document.addEventListener("DOMContentLoaded", function() {
+    const slides = document.querySelectorAll(".hobbies-carousel .slide");
+    if (slides.length === 0) return;
+
+    let currentSlide = 0;
+
+    // QUAN TRỌNG: Đảm bảo slide đầu tiên có class 'active'
+    // vì bạn đã có class 'active' trong HTML, đoạn này chỉ để phòng ngừa
+    if (!slides[0].classList.contains('active')) {
+        slides[0].classList.add('active'); 
+    }
+
+    function nextSlide() {
+        // Loại bỏ class 'active' khỏi slide hiện tại
+        slides[currentSlide].classList.remove("active"); 
+        
+        // Chuyển sang slide kế tiếp (quay lại 0 nếu hết)
+        currentSlide = (currentSlide + 1) % slides.length; 
+        
+        // Thêm class 'active' cho slide mới
+        slides[currentSlide].classList.add("active"); 
+    }
+
+    // Thiết lập tự động chuyển slide sau mỗi 3 giây
+    setInterval(nextSlide, 3000); 
+});
 /* ==============================
    PHONG PAGE SCRIPT
    ============================== */
@@ -402,33 +631,66 @@ function animateSkills() {
 // ===============================
 // PHONG - HIỆU ỨNG THANH KỸ NĂNG
 // ===============================
-document.addEventListener("DOMContentLoaded", () => {
-  const skillSection = document.getElementById("skills");
-  const skillBars = skillSection.querySelectorAll(".fill");
+// === LOGIC THANH KỸ NĂNG CHO PHẦN PHONG-PAGE ===
+document.addEventListener("DOMContentLoaded", function() {
+    const skillFills = document.querySelectorAll('.phong-page .skill .fill');
 
-  // Hàm reset lại width = 0
-  function resetSkillBars() {
-    skillBars.forEach(bar => {
-      bar.style.width = "0";
+    if (skillFills.length === 0) return;
+
+    // Gán width 0% ban đầu
+    skillFills.forEach(fillBar => {
+        fillBar.style.width = '0%'; 
     });
-  }
 
-  // Hàm chạy animation
-  function animateSkillBars() {
-    skillBars.forEach(bar => {
-      const targetWidth = bar.getAttribute("style").match(/width:\s*([\d.]+%)/)[1];
-      bar.style.width = targetWidth;
-    });
-  }
+    // Hàm reset về 0% (Để gọi từ showSection)
+    window.resetSkills = function() {
+        skillFills.forEach(fillBar => {
+            fillBar.style.width = '0%';
+        });
+    }
 
-  // Khi người dùng bấm nút “Kỹ năng”
-  const skillButton = document.querySelector("button[onclick*='skills']");
-  skillButton.addEventListener("click", () => {
-    resetSkillBars(); // đặt về 0 trước
-    setTimeout(animateSkillBars, 300); // sau 0.3s trượt mượt lên %
-  });
+    // Hàm chạy animation (Để gọi từ showSection)
+    window.animateSkills = function() {
+        // Reset về 0% trước để hiệu ứng chạy lại mượt mà
+        window.resetSkills(); 
+        
+        // Chạy sau 50ms để trình duyệt có thời gian reset về 0
+        setTimeout(() => {
+            skillFills.forEach(fillBar => {
+                const targetWidth = fillBar.getAttribute('data-percent');
+                if (targetWidth) {
+                    fillBar.style.width = targetWidth; // Kích hoạt hiệu ứng CSS transition
+                }
+            });
+        }, 50); 
+    }
+    
+    // Đặt lại thanh kỹ năng khi trang tải lần đầu (nếu cần)
+    window.resetSkills();
 });
 
+// GHI CHÚ QUAN TRỌNG:
+// Bạn phải đảm bảo hàm showSection(sectionId) bên dưới được định nghĩa
+// Nếu hàm này đã nằm trong script.js, vui lòng sửa nó.
+// Nếu nó là global function, bạn chỉ cần sửa logic bên trong.
+
+function showSection(sectionId) {
+    // 1. Logic ẩn tất cả section và hiện section được chọn (Rất quan trọng cho nút bấm)
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
+
+    // 2. Logic Kích hoạt thanh kỹ năng
+    if (sectionId === 'skills' && typeof window.animateSkills === 'function') {
+        window.animateSkills(); // Chạy thanh kỹ năng khi vào mục Skills
+    } else if (typeof window.resetSkills === 'function') {
+        window.resetSkills(); // Reset khi chuyển sang mục khác
+    }
+}
 
 /**
  * YÊU CẦU: JavaScript cho Responsive Menu và Scroll Animation
@@ -512,4 +774,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// HIỆU ỨNG 3D TILT CHO PHẦN DỰ ÁN
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+  });
+
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform 0.2s ease';
+  });
+});
 

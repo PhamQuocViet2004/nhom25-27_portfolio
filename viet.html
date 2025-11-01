@@ -5,20 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phạm Quốc Việt - Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <script src="script.js" defer></script> 
+  <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Hiệu ứng chữ chạy và hiện dần */
+    .typing-box {
+      background: rgba(255,255,255,0.85);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      animation: fadeBox 2s ease;
+    }
+    @keyframes fadeBox {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .typing-text {
+      display: inline-block;
+      border-right: 2px solid #007bff;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 5s steps(40, end), blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from {width: 0;}
+      to {width: 100%;}
+    }
+    @keyframes blink {
+      50% {border-color: transparent;}
+    }
+
+    /* Thanh chứng chỉ động */
+    .cert-skill {
+      margin-bottom: 20px;
+    }
+    .cert-skill p {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #00224d;
+    }
+    .cert-bar {
+      width: 100%;
+      height: 22px;
+      background: #e0e0e0;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+    .cert-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #00c3ff, #007bff);
+      border-radius: 30px;
+      color: #fff;
+      text-align: right;
+      padding-right: 8px;
+      line-height: 22px;
+      font-weight: bold;
+      transition: width 2s ease-in-out;
+    }
+
+    /* Đặt nút quay lại bên trái */
+    .nav-buttons {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      flex-direction: column;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body class="viet-page">
   <div id="particles-js"></div>
+
   <header>
     <div class="banner">
       <h1>Xin chào, tôi là <span class="name-highlight">Phạm Quốc Việt</span></h1>
-      <p>Sinh viên ngành Công nghệ thông tin trường Đại học Bình Dương</p>
+      <p>Sinh viên ngành Công nghệ thông tin - Đại học Bình Dương</p>
     </div>
     <nav class="navbar">
       <a href="#about">Thông tin</a>
+      <a href="#certificates">Chứng chỉ</a>
       <a href="#skills">Kỹ năng</a>
       <a href="#projects">Dự án</a>
       <a href="#hobbies">Sở thích</a>
@@ -26,23 +95,29 @@
     </nav>
   </header>
 
-  <!-- Thông tin -->
+  <!-- THÔNG TIN CÁ NHÂN -->
   <section id="about" class="section">
     <h2>Thông tin cá nhân</h2>
-    <div class="about-container">
-      <img src="images/anh.viet/2.jpg" alt="Ảnh cá nhân">
-      <div class="info">
-        <p><strong>Họ tên:</strong> Phạm Quốc Việt</p>
-        <p><strong>Ngày sinh:</strong> 13/10/2004</p>
-        <p><strong>Quê quán:</strong> Đắk Lắk</p>
-        <p><strong>Ngành học:</strong> Công nghệ thông tin</p>
-        <p><strong>Email:</strong> phmquocviet9870@gmail.com</p>
-
-      </div>  
+    <div class="about-wrapper">
+      <img src="images/anh.viet/2.jpg" alt="Ảnh cá nhân" class="profile-photo">
+      <div class="info-box">
+        <div class="info-marquee">
+          <div class="marquee-content">
+            <span><strong>Họ tên:</strong> Phạm Quốc Việt • </span>
+            <span><strong>Ngày sinh:</strong> 13/10/2004 • </span>
+            <span><strong>Quê quán:</strong> Đắk Lắk • </span>
+            <span><strong>Ngành học:</strong> Công nghệ thông tin • </span>
+            <span><strong>Email:</strong> phmquocviet9870@gmail.com • </span>
+            <span><strong>Sở thích:</strong> Đam mê sáng tạo, yêu thích lập trình và UI/UX • </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="about" class="section">
-    <h2>Thông tin Nghề nghiệp</h2>
+  <!-- THÔNG TIN NGHỀ NGHIỆP -->
+  <section id="career" class="section">
+    <h2>Thông tin nghề nghiệp</h2>
     <div class="career-box">
       <div class="career-img">
         <img src="images/anh.viet/1.jpg" alt="Ảnh cá nhân">
@@ -54,140 +129,128 @@
         <p><strong>Định hướng:</strong> Phát triển kỹ năng lập trình, thiết kế và làm việc trong các dự án thực tế.</p>
       </div>
     </div>
-</section>
+  </section>
+
+  <!-- CHỨNG CHỈ -->
+  <section id="certificates" class="section">
+    <h2>Chứng chỉ</h2>
+    <div class="certificate-box">
+      <p><strong>Tình trạng:</strong> Không có</p>
+    </div>
+  </section>
 
 
-  <!-- Kỹ năng -->
+  <!-- KỸ NĂNG -->
   <section id="skills" class="section">
-        <h2>Kỹ năng & Ngôn ngữ</h2>
-
-        <div class="skill">
-            <p>HTML/CSS</p>
-            <div class="progress-bar"><div class="progress" style="width: 85%">85%</div></div>
+    <h2>KỸ NĂNG & NGÔN NGỮ</h2>
+    <div class="skills-container"> <div class="skills-left-side">
+            <h3>Kỹ năng sống</h3>
+            <div class="pie-chart-container">
+                <canvas id="lifeSkillsPieChart"></canvas> </div>
+            <div class="pie-chart-labels">
+                <div class="skill-label" data-skill="teamwork">Làm việc nhóm</div>
+                <div class="skill-label" data-skill="problem-solving">Giải quyết vấn đề</div>
+                <div class="skill-label" data-skill="communication">Giao tiếp</div>
+                <div class="skill-label" data-skill="critical-thinking">Tư duy phản biện</div>
+            </div>
         </div>
 
-        <div class="skill">
-            <p>JavaScript</p>
-            <div class="progress-bar"><div class="progress" style="width: 70%">70%</div></div>
+        <div class="skills-right-side">
+            <h3>Kỹ năng chuyên môn & Ngôn ngữ</h3>
+            <div class="cert-skill"><p>HTML/CSS</p><div class="cert-bar"><div class="cert-fill" data-percent="90%">90%</div></div></div>
+            <div class="cert-skill"><p>JavaScript</p><div class="cert-bar"><div class="cert-fill" data-percent="70%">70%</div></div></div>
+            <div class="cert-skill"><p>Python</p><div class="cert-bar"><div class="cert-fill" data-percent="80%">80%</div></div></div>
+            <div class="cert-skill"><p>Tiếng Anh</p><div class="cert-bar"><div class="cert-fill" data-percent="60%">60%</div></div></div>
         </div>
+    </div>
+  </section>
 
-        <div class="skill">
-            <p>Python</p>
-            <div class="progress-bar"><div class="progress" style="width: 80%">80%</div></div>
-        </div>
-
-        <div class="skill">
-            <p>Tiếng Anh</p>
-            <div class="progress-bar"><div class="progress" style="width: 60%">60%</div></div>
-        </div>
-    </section>
-
-  <!-- Dự án -->
+    <!-- DỰ ÁN -->
   <section id="projects" class="section">
     <h2>Dự án</h2>
-    <div class="flip-container">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Website Chatbots</h3>
-          </div>
-          <div class="flip-card-back">
-            <img src="images/anh.viet/chatbot.jpg" alt="Chatbot Project">
-          </div>
+
+    <div class="viet-page project-slider">
+      <!-- Slide 1: Hiệu ứng Neon Glow -->
+      <div class="project-slide active" data-effect="neon">
+        <div class="project-card neon-card">
+          <img src="images/anh.viet/chatbot.jpg" alt="Website Chatbots">
+          <div class="text">Website Chatbots</div>
         </div>
       </div>
 
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Game ca-ro</h3>
-          </div>
-          <div class="flip-card-back">
-            <img src="images/anh.viet/caro.jpg" alt="Game Project">
-          </div>
+      <!-- Slide 2: Hiệu ứng Parallax -->
+      <div class="project-slide" data-effect="parallax">
+        <div class="project-card parallax-card">
+          <img src="images/anh.viet/mnist.png" alt="Nhận diện chữ viết tay">
+          <div class="text">Ứng dụng nhận diện chữ viết tay</div>
         </div>
       </div>
 
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Game Mario</h3>
-          </div>
-          <div class="flip-card-back">
-            <img src="images/anh.viet/mario.jpg" alt="Game Project">
-          </div>
-        </div>
+      <!-- Slide 3: Hiệu ứng Glass Morphism -->
+      <div class="project-slide" data-effect="glass">
+        <div class="project-card glass-card">
+          <img src="images/anh.viet/caro.jpg" alt="Game Caro">
+          <div class="text">Game Caro AI</div>
+        </div>      
       </div>
 
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Ứng dụng nhận diện chữ viết tay</h3>
-          </div>
-          <div class="flip-card-back">
-            <img src="images/anh.viet/mnist.png" alt="Game Project">
-          </div>
+      <!-- Slide 4: Hiệu ứng Floating Glow Motion -->
+      <div class="project-slide" data-effect="floatglow">
+        <div class="project-card float-card">
+          <img src="images/anh.viet/mario.jpg" alt="Game Mario">
+          <div class="text">Game Mario 2D</div>
         </div>
+      </div>
+    </div>
+
+    <div class="viet-page project-controls">
+      <button id="prevProject">⬅️ Back</button>
+      <button id="nextProject">Next ➡️</button>
+    </div>
+  </section>
+
+  <!-- SỞ THÍCH -->
+  <section id="hobbies" class="viet-page section">
+    <h2>SỞ THÍCH</h2>
+
+    <div class="hobbies-carousel">
+      <div class="slide active">
+        <img src="images/anh.viet/laptrinh.jpg" alt="Lập trình">
+        <div class="text">Lập trình</div>
+      </div>
+      <div class="slide">
+        <img src="images/anh.viet/thethao.jpg" alt="Thể thao">
+        <div class="text">Thể thao</div>
+      </div>
+      <div class="slide">
+        <img src="images/anh.viet/lienquan.jpg" alt="Chơi game">
+        <div class="text">Chơi game</div>
+      </div>
+      <div class="slide">
+        <img src="images/anh.viet/nhac.jpg" alt="Nghe nhạc">
+        <div class="text">Nghe nhạc</div>
       </div>
     </div>
   </section>
 
-  <!-- Sở thích -->
-  <section id="hobbies" class="section">
-    <h2>Sở thích</h2>
-    <div class="flip-container">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front"><h3>Lập trình</h3></div>
-          <div class="flip-card-back"><img src="images/anh.viet/laptrinh.jpg" alt="Coding"></div>
-        </div>
-      </div>  
-
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front"><h3>Chơi Game</h3></div>
-          <div class="flip-card-back"><img src="images/anh.viet/lienquan.jpg" alt="Gaming"></div>
-        </div>
-      </div>  
-
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front"><h3>Thể thao</h3></div>
-          <div class="flip-card-back"><img src="images/anh.viet/thethao.jpg" alt="Sporting"></div>
-        </div>
-      </div>  
-
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front"><h3>Nghe nhạc</h3></div>
-          <div class="flip-card-back"><img src="images/anh.viet/nhac.jpg" alt="Listening to music"></div>
-        </div>
-      </div>  
-    </div>
-  </section>
-
-  <!-- Liên hệ -->
+  <!-- LIÊN HỆ -->
   <section id="contact" class="section">
     <h2>Liên hệ</h2>
     <div class="contact-icons">
-        <a href="https://www.facebook.com/share/1Cwxz59pHV/?mibextid=wwXIfr" target="_blank" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.tiktok.com/@phamquocviet_2004?_t=ZS-90ZHizipSld&_r=1" target="_blank" class="icon tiktok"><i class="fab fa-tiktok"></i></a>
-        <a href="tel:0346031656" class="icon phone"><i class="fa-solid fa-phone"></i></a>
+      <a href="https://www.facebook.com/share/1Cwxz59pHV/?mibextid=wwXIfr" target="_blank" class="icon facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.tiktok.com/@phamquocviet_2004" target="_blank" class="icon tiktok"><i class="fab fa-tiktok"></i></a>
+      <a href="tel:0346031656" class="icon phone"><i class="fa-solid fa-phone"></i></a>
     </div>
-
     <p class="phone-text">📞 SĐT: <a href="tel:0346031656">0346031656</a></p>
-</section>
+  </section>
 
-<!-- Nút điều hướng -->
-<div class="nav-buttons">
-  <a href="index.html" class="nav-btn home-btn">🏠 Trang chính</a>
-</div>
+  <!-- NÚT TRANG CHÍNH -->
+  <div class="nav-buttons">
+    <a href="index.html" class="mini-home-btn"><i class="fa-solid fa-house"></i></a>
+  </div>
 
-
-  <!-- Footer -->
   <footer>
-    <p>© 2025 Phạm Quốc Việt- Portfolio cá nhân</p>
+    <p>© 2025 Phạm Quốc Việt - Portfolio cá nhân</p>
   </footer>
-
 </body>
 </html>

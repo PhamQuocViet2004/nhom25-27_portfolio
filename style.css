@@ -225,25 +225,25 @@ body.viet-page {
 }
 
 /* ===================== HEADER + NAVBAR ===================== */
-header {
+.viet-page header {
   text-align: center;
   padding-top: 30px;
 }
 
-.banner {
+.viet-page .banner {
   margin-bottom: 30px;
 }
 
-.banner h1 {
+.viet-page .banner h1 {
   font-size: 2em;
   color: #fff;
 }
 
-.name-highlight {
+.viet-page .name-highlight {
   color: #ffcc00;
 }
 
-.navbar {
+.viet-page .navbar {
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
@@ -254,7 +254,7 @@ header {
   margin: 0 auto;
 }
 
-.navbar a {
+.viet-page .navbar a {
   color: white;
   text-decoration: none;
   margin: 10px 20px;
@@ -262,12 +262,12 @@ header {
   transition: color 0.3s;
 }
 
-.navbar a:hover {
+.viet-page .navbar a:hover {
   color: #ffcc00;
 }
 
 /* ===================== KHUNG CHUNG CHO MỖI PHẦN ===================== */
-.section {
+.viet-page .section {
   width: 85%;
   margin: 60px auto;
   padding: 40px;
@@ -278,12 +278,12 @@ header {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.section:hover {
+.viet-page .section:hover {
   transform: scale(1.01);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-.section h2 {
+.viet-page .section h2 {
   text-align: center;
   color: #00224d;
   font-size: 1.8em;
@@ -292,7 +292,7 @@ header {
 }
 
 /* ===================== THÔNG TIN CÁ NHÂN ===================== */
-.about-container {
+.viet-page .about-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -300,7 +300,7 @@ header {
   gap: 40px;
 }
 
-.about-container img {
+.viet-page .about-container img {
   width: 220px;
   height: 220px;
   border-radius: 50%;
@@ -308,17 +308,17 @@ header {
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-.info p {
+.viet-page .info p {
   margin-bottom: 10px;
   font-size: 1.1em;
 }
 
-.info strong {
+.viet-page .info strong {
   color: #007bff;
 }
 
 /* ===================== NGHỀ NGHIỆP ===================== */
-.career-box {
+.viet-page .career-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -326,7 +326,7 @@ header {
   flex-wrap: wrap;
 }
 
-.career-img img {
+.viet-page .career-img img {
   width: 220px;
   height: 220px;
   object-fit: cover;
@@ -335,173 +335,433 @@ header {
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-.career-text {
+.viet-page .career-text {
   max-width: 550px;
   line-height: 1.8;
   font-size: 1.1em;
   color: #222;
 }
 
-.career-text strong {
+.viet-page .career-text strong {
   color: #007bff;
 }
 
 /* ===================== KỸ NĂNG ===================== */
-.skill {
-  margin-bottom: 20px;
+/* === KỸ NĂNG & NGÔN NGỮ === */
+/* === KỸ NĂNG & NGÔN NGỮ === */
+#skills h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
 }
 
-.skill p {
-  font-weight: 600;
-  margin-bottom: 5px;
-  color: #00224d;
+.skills-container {
+    display: flex; /* Dùng Flexbox để chia 2 cột */
+    justify-content: space-around;
+    align-items: flex-start; /* Căn chỉnh các cột lên đầu */
+    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+    gap: 40px; /* Khoảng cách giữa 2 cột */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.progress-bar {
-  width: 100%;
-  height: 25px;
-  background: #e0e0e0;
-  border-radius: 30px;
+.skills-left-side, .skills-right-side {
+    flex: 1; /* Mỗi cột chiếm 1 phần bằng nhau */
+    min-width: 300px; /* Chiều rộng tối thiểu của mỗi cột */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.skills-left-side h3, .skills-right-side h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #444;
+    font-size: 1.8rem;
+}
+
+/* --- Thanh Tiến Trình (Kỹ năng chuyên môn) --- */
+.cert-skill {
+    margin-bottom: 20px;
+}
+
+.cert-skill p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.cert-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 25px; /* Tăng chiều cao thanh bar */
+    overflow: hidden;
+    position: relative;
+}
+
+.cert-fill {
+    height: 100%;
+    background: linear-gradient(to right, #0ea5e9, #007bff); /* Gradient màu xanh */
+    text-align: right;
+    color: white;
+    line-height: 25px; /* Cùng với chiều cao của cert-bar */
+    padding-right: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    /* THÊM TRANSITION ĐỂ THANH CHẠY MƯỢT MÀ */
+    transition: width 1s ease-out; 
+    width: 0%; /* Ban đầu ẩn để có hiệu ứng chạy */
+}
+
+/* --- Biểu Đồ Tròn (Kỹ năng sống) --- */
+.pie-chart-container {
+    width: 250px; /* Kích thước biểu đồ */
+    height: 250px;
+    margin: 30px auto 20px auto;
+    position: relative;
+}
+
+.pie-chart-labels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.skill-label {
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #666;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.skill-label:hover {
+    background-color: #e9ecef;
+    color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.skill-label.active { /* Class khi được click chọn */
+    background-color: #0ea5e9;
+    color: white;
+    font-weight: bold;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5); /* Hiệu ứng nổi bật */
+}
+
+/* Responsive cho Skills Section */
+@media (max-width: 768px) {
+    .skills-container {
+        flex-direction: column; /* Chuyển thành 1 cột trên màn hình nhỏ */
+        align-items: center;
+    }
+    .skills-left-side, .skills-right-side {
+        width: 100%;
+        max-width: 500px; /* Giới hạn chiều rộng trên mobile */
+    }
+}
+
+/* === SLIDER CHO PHẦN DỰ ÁN === */
+.viet-page .project-slider {
+  position: relative;
   overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  background: linear-gradient(90deg, #00b4d8, #007bff);
-  text-align: right;
-  padding-right: 10px;
-  line-height: 25px;
-  color: #fff;
-  font-weight: bold;
-}
-
-/* ===================== FLIP-CARD (DỰ ÁN & SỞ THÍCH) ===================== */
-.flip-container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+}
+
+.viet-page .project-slide {
+  display: none;
   justify-content: center;
   gap: 30px;
+  transition: opacity 1s ease;
+  opacity: 0;
 }
 
-.flip-card {
-  background-color: transparent;
-  width: 320px;
-  height: 260px;
-  perspective: 1000px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  backface-visibility: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+.viet-page .project-slide.active {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  opacity: 1;
+}
+
+/* Nút điều khiển */
+.viet-page .project-controls {
   text-align: center;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1000;
+  pointer-events: auto;
 }
-
-.flip-card-front {
-  background: #007bff;
+.viet-page .project-controls button {
+  background: linear-gradient(90deg, #00ffff, #007bff);
+  border: none;
+  padding: 10px 20px;
   color: #fff;
-  font-weight: bold;
-  font-size: 1.2em;
-  padding: 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.viet-page .project-controls button:hover {
+  transform: scale(1.1);
 }
 
-.flip-card-back {
-  transform: rotateY(180deg);
-  background: #fff;
+.viet-page .neon-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  width: 350px;
+  box-shadow: 0 0 20px rgba(0,255,255,0.3);
+  animation: neonPulse 3s infinite ease-in-out;
+  transition: transform 0.4s ease;
+}
+.viet-page .neon-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+.viet-page .neon-card:hover img {
+  transform: scale(1.08);
+}
+.viet-page .neon-card .text {
+  text-align: center;
+  padding: 10px;
+  color: #00ffff;
+  font-weight: 600;
+  text-shadow: 0 0 10px #00ffff;
+  animation: textPulse 3s infinite ease-in-out;
 }
 
-.flip-card-back img {
+@keyframes textPulse {
+  0%, 100% { text-shadow: 0 0 10px #00ffff, 0 0 25px rgba(0,255,255,0.4); }
+  50% { text-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0,255,255,0.7); }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0,255,255,0.4),
+                0 0 30px rgba(0,255,255,0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0,255,255,0.8),
+                0 0 60px rgba(0,255,255,0.5);
+  }
+}
+
+
+.viet-page .parallax-card {
+  position: relative;
+  width: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.viet-page .parallax-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.viet-page .parallax-card .text {
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+}
+
+
+.viet-page .glass-card {
+  position: relative;
+  width: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.viet-page .glass-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  opacity: 0.9;
+}
+.viet-page .glass-card:hover {
+  transform: scale(1.05);
+}
+.viet-page .glass-card .text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 0 0 16px 16px;
+}
+
+
+.viet-page .float-card {
+  position: relative;
+  width: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  animation: floaty 4s ease-in-out infinite, glowShift 6s linear infinite;
+  transition: transform 0.3s ease;
+}
+.viet-page .float-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.viet-page .float-card .text {
+  text-align: center;
+  padding: 10px;
+  color: #00ffff;
+  font-weight: 600;
+  background: rgba(0,0,0,0.5);
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes glowShift {
+  0% { box-shadow: 0 0 15px #00ffff, 0 0 30px #007bff; }
+  50% { box-shadow: 0 0 25px #ff00ff, 0 0 40px #ff33cc; }
+  100% { box-shadow: 0 0 15px #00ffff, 0 0 30px #007bff; }
+}
+
+
+.viet-page .project-controls {
+  position: relative;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.viet-page .reveal-card .overlay {
+  background: linear-gradient(120deg, rgba(0,0,0,0.6) 0%, rgba(0,255,255,0.15) 50%, rgba(0,0,0,0.6) 100%);
+  background-size: 200% 100%;
+  animation: lightSweep 5s linear infinite;
+}
+
+@keyframes lightSweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* === SLIDER CHO PHẦN SỞ THÍCH === */
+
+.viet-page .hobbies-carousel {
+  position: relative;
+  width: 80%;
+  max-width: 700px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  /* 1. Đã sửa: Chiều cao cố định */
+  height: 400px; /* Điều chỉnh nếu cần */
+}
+
+.viet-page .hobbies-carousel .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 15px;
-  object-fit: cover;
+  /* 2. Đã sửa: Ẩn/Hiện Slide */
+  opacity: 0; 
+  transition: opacity 1s ease;
+}
+
+.viet-page .hobbies-carousel .slide.active {
+  opacity: 1;
+  z-index: 1; 
+}
+
+.viet-page .hobbies-carousel .slide img {
+    /* 3. Sửa lỗi chồng ảnh: Thêm display: block */
+    display: block; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 4. Định vị chữ (Caption) - Giữa (ngang) và Dưới (dọc) */
+.viet-page .hobbies-carousel .slide .text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.75); 
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center; 
+    
+    opacity: 0;
+    transition: opacity 0.5s ease 0.5s; 
+    z-index: 2;
+}
+
+.viet-page .hobbies-carousel .slide.active .text {
+    opacity: 1; 
 }
 
 /* ===================== LIÊN HỆ ===================== */
-.contact-icons {
+.viet-page .contact-icons {
   display: flex;
   justify-content: center;
   gap: 30px;
   margin: 25px 0;
 }
 
-.icon {
+.viet-page .icon {
   font-size: 40px;
   color: #d2691e;
   transition: transform 0.3s, color 0.3s;
 }
 
-.icon:hover {
+.viet-page .icon:hover {
   transform: scale(1.2);
   color: #ff8c00;
 }
 
-.phone-text {
+.viet-page .phone-text {
   text-align: center;
   font-weight: bold;
   font-size: 1.1em;
   color: #00224d;
 }
 
-.phone-text a {
+.viet-page .phone-text a {
   color: #007bff;
   text-decoration: none;
 }
 
-/* ===================== NÚT TRANG CHÍNH & CHỈNH SỬA ===================== */
-.nav-buttons {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1000;
-}
-
-.nav-btn {
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 30px;
-  color: #fff;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: all 0.3s;
-  text-align: center;
-}
-
-.nav-btn:hover {
-  transform: scale(1.05);
-}
-
-.home-btn {
-  background: linear-gradient(135deg, #00b09b, #96c93d);
-}
-
-.edit-btn {
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
-}
-
 /* ===================== FOOTER ===================== */
-footer {
+.viet-page footer {
   text-align: center;
   padding: 20px;
   background: rgba(0,0,0,0.15);
@@ -510,6 +770,105 @@ footer {
   font-size: 0.95em;
   color: #fff;
 }
+
+/* === THÔNG TIN CÁ NHÂN GỌN GÀNG, DỄ ĐỌC === */
+.viet-page .about-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 40px 60px;
+}
+
+.viet-page .profile-photo {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.viet-page .profile-photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(0, 255, 180, 0.6);
+}
+
+/* === HỘP CHỨA THÔNG TIN === */
+.viet-page .info-box {
+  flex: 1;
+  background: linear-gradient(135deg, #f3f6ff, #eaf9f2);
+  border-radius: 16px;
+  padding: 18px 30px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+/* === KHUNG CHẠY CHỮ === */
+.viet-page .info-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  border-radius: 12px;
+  height: 50px; /* 👉 giảm chiều cao khung banner */
+  display: flex;
+  align-items: center;
+}
+
+/* === CHỮ CHẠY LIÊN TỤC === */
+.viet-page .marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: textScroll 22s linear infinite;
+  font-size: 18px;
+  font-weight: 600;
+  color: #002244; /* 👉 màu chữ đậm hơn, dễ đọc */
+  text-shadow: 0 0 2px rgba(255,255,255,0.6);
+}
+
+/* Hiệu ứng chạy ngang vòng lặp */
+@keyframes textScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Nền di chuyển nhẹ, không chói */
+.viet-page .info-box {
+  background-size: 200% 200%;
+  animation: softGradient 10s ease-in-out infinite;
+}
+@keyframes softGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Khi hover thì tạm dừng */
+.viet-page .info-marquee:hover .marquee-content {
+  animation-play-state: paused;
+  color: #004070;
+}
+
+
+/* === Nút Trang chính mini góc trái === */
+.mini-home-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(90deg, #00c6ff, #00ff7f);
+  color: #fff;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  text-decoration: none;
+  z-index: 2000;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.mini-home-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #00ff9d;
+}
+
 
 /* Màu Chủ Đạo: Cam Cháy (#D2691E), Nâu Đất (#8B4513), Vàng Mù Tạt (#FFC300) */
 body.minh-page {
